@@ -7,14 +7,8 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private Transform _targetPointA, _targetPointB;
     [SerializeField] private float _platformSpeed = 1.0f;
     private Transform _actualTarget;
-    private Player _player;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
-    }
-
+    
     // Update is called once per frame
     void FixedUpdate()
     {
