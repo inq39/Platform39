@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private float _yVelocity;
     private bool _canDoubleJump = false;
     [SerializeField]
-    private int _coins;
+    public int Coins { get; private set; }
     private UIManager _uiManager;
     [SerializeField]
     private int _lives = 3;
@@ -70,9 +70,9 @@ public class Player : MonoBehaviour
 
     public void AddCoins()
     {
-        _coins++;
+        Coins++;
 
-        _uiManager.UpdateCoinDisplay(_coins);
+        _uiManager.UpdateCoinDisplay(Coins);
     }
 
     public void Damage()
