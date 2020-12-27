@@ -37,8 +37,6 @@ public class MovingPlatform : MonoBehaviour
             other.transform.parent = this.transform;
         }
     }
-    // todo parenting
-
 
     private void OnTriggerExit(Collider other)
     {

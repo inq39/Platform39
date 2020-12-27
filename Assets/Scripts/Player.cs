@@ -11,14 +11,16 @@ public class Player : MonoBehaviour
     [SerializeField] private UIManager _uiManager;
     private float _yVelocity;
     private bool _doubleJumpAllowed;
-    private int _collectedCoins; 
+    private int _collectedCoins;
+    public int PlayerLives { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
         _collectedCoins = 0;
         _uiManager.UpdateCollectedCoinsText(_collectedCoins);
-
+        PlayerLives = 3;
+        _uiManager.UpdateLivesText(PlayerLives);
         _characterController = GetComponent<CharacterController>();
 
         if (_uiManager == null)
@@ -39,6 +41,13 @@ public class Player : MonoBehaviour
         _uiManager.UpdateCollectedCoinsText(_collectedCoins);
 
     }
+    public void UpdateLives()
+    {
+        PlayerLives--;
+        _uiManager.UpdateLivesText(PlayerLives);
+
+    }
+
 
     private void PlayerMovement()
     {
