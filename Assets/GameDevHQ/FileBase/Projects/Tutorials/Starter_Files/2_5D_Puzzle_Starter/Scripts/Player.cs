@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
     private Vector3 _velocity, _direction, _wallSurfaceNormal;
+    private float _pushPower = 4.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +83,18 @@ public class Player : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.tag == "Wall" && !_controller.isGrounded)
+        if (hit.transform.tag == "MovingBox" && _controller.isGrounded)
+        {
+            Rigidbody boxRb = hit.transform.GetComponent<Rigidbody>();
+            Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, 0);
+            
+            if (boxRb != null)
+            {
+                boxRb.velocity = pushDirection * _pushPower;
+            }
+        }
+
+        if (hit.transform.tag == "Wall" && !_controller.isGrounded)
         {
             Debug.DrawRay(hit.point, hit.normal, Color.blue);
             _wallSurfaceNormal = hit.normal;

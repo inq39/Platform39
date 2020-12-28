@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - Wall
+  - MovingBox
   layers:
   - Default
   - TransparentFX
