@@ -9,11 +9,22 @@ public class Player : MonoBehaviour
     [SerializeField] private float _gravity;
     [SerializeField] private Vector3 _velocity;
     private CharacterController _cc;
+    private Animator _playerAnimatorController;
 
     // Start is called before the first frame update
     void Start()
     {
         _cc = GetComponent<CharacterController>();
+        if (_cc == null)
+        {
+            Debug.LogError("Character controller is null.");
+        }
+
+        _playerAnimatorController = GetComponentInChildren<Animator>();
+        if (_playerAnimatorController == null)
+        {
+            Debug.LogError("Animator is null.");
+        }
     }
 
     // Update is called once per frame
@@ -24,7 +35,8 @@ public class Player : MonoBehaviour
 
         if (_cc.isGrounded)
         {
-            float horizontalInput = Input.GetAxis("Horizontal");
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            _playerAnimatorController.SetFloat("Speed", Mathf.Abs(horizontalInput));
             Vector3 direction = new Vector3(0, 0, horizontalInput);
             _velocity = direction * _playerSpeed;
 
