@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector3 _velocity;
     private CharacterController _cc;
     private Animator _playerAnimatorController;
+    private bool _isJumping = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,19 +31,34 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
-
+                
         if (_cc.isGrounded)
         {
+            if (_isJumping)
+            {
+                _isJumping = false;
+                _playerAnimatorController.SetBool("Jumping", _isJumping);
+            }
+
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             _playerAnimatorController.SetFloat("Speed", Mathf.Abs(horizontalInput));
             Vector3 direction = new Vector3(0, 0, horizontalInput);
             _velocity = direction * _playerSpeed;
 
+            if (horizontalInput != 0)
+            {
+                Vector3 flipping = transform.localEulerAngles;
+                flipping.y = direction.z > 0 ? 0 : 180;
+                transform.localEulerAngles = flipping;
+            }
+
+           
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                _isJumping = true;
                 _velocity.y += _jumpHeight;
+                _playerAnimatorController.SetBool("Jumping", _isJumping);
             }
 
         }

@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 891155350}
   - component: {fileID: 891155348}
   - component: {fileID: 891155347}
-  - component: {fileID: 891155352}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -170,8 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpeed: 10
-  _jumpHeight: 20
-  _gravity: -30
+  _jumpHeight: 25
+  _gravity: -40
   _velocity: {x: 0, y: 0, z: 0}
 --- !u!143 &891155348
 CharacterController:
@@ -215,18 +214,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &891155352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891155346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa6a9c956dc72d459784fb3f61e1b70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1093315148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -292,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: af50d015660ab2142aa132f8a6ea702b, type: 3}
       propertyPath: m_Name
-      value: Female_07_Rigged@Dwarf Idle
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: af50d015660ab2142aa132f8a6ea702b, type: 3}
       propertyPath: m_Controller
