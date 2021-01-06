@@ -31,7 +31,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-                
+        CalculateMovement();            
+                        
+    }
+
+    public void UpdateLedgeStatus(Vector3 handpos)
+    {
+        _cc.enabled = false;
+        _playerAnimatorController.SetBool("Hanging", true);
+        transform.position = handpos;
+    }
+
+    private void CalculateMovement()
+    {
         if (_cc.isGrounded)
         {
             if (_isJumping)
@@ -52,8 +64,6 @@ public class Player : MonoBehaviour
                 transform.localEulerAngles = flipping;
             }
 
-           
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 _isJumping = true;
@@ -62,7 +72,7 @@ public class Player : MonoBehaviour
             }
 
         }
-
+                
         _velocity.y += _gravity * Time.deltaTime;
         _cc.Move(_velocity * Time.deltaTime);
     }
