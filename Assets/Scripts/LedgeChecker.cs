@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LedgeGrabChecker : MonoBehaviour
+public class LedgeChecker : MonoBehaviour
 {
     private Player _player;
     [SerializeField] private Vector3 _handPos;

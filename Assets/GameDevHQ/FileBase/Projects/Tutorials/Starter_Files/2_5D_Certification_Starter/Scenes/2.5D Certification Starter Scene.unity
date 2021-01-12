@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711b2a997d984314688280d351b0da43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _handPos: {x: 0.53, y: 70.5, z: 123.5}
+  _handPos: {x: 0.53, y: 70.4, z: 123.3}
 --- !u!1 &1216695342
 GameObject:
   m_ObjectHideFlags: 0
