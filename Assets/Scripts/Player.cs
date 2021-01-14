@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     private CharacterController _cc;
     private Animator _playerAnimatorController;
     private bool _isJumping = false;
+    private bool _isHanging = false;
+    private LedgeChecker _activeLedgeChecker; 
 
     // Start is called before the first frame update
     void Start()
@@ -31,21 +33,35 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CalculateMovement();            
-                        
+        CalculateMovement();
+
+        if (_isHanging)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _playerAnimatorController.SetTrigger("Climbing");
+                _isHanging = false;
+                _isJumping = false;
+            }
+        }
     }
 
-    public void UpdateLedgeStatus(Vector3 handpos)
+    public void UpdateLedgeStatus(Vector3 handPos, LedgeChecker currentLedgeChecker)
     {
+        _isHanging = true;
         _cc.enabled = false;
-        _playerAnimatorController.SetBool("Hanging", true);
-        transform.position = handpos;
+        _activeLedgeChecker = currentLedgeChecker;
+        _playerAnimatorController.SetBool("Hanging", _isHanging);
+        _playerAnimatorController.SetBool("Jumping", _isJumping);
+        _playerAnimatorController.SetFloat("Speed", 0.0f);
+        transform.position = handPos;
+       
     }
 
     private void CalculateMovement()
     {
         if (_cc.isGrounded)
-        {
+        {     
             if (_isJumping)
             {
                 _isJumping = false;
@@ -72,9 +88,20 @@ public class Player : MonoBehaviour
             }
 
         }
+
+        
                 
         _velocity.y += _gravity * Time.deltaTime;
         _cc.Move(_velocity * Time.deltaTime);
+    }
+
+    public void Climbing()
+    {
+        _isHanging = false;
+        transform.position = _activeLedgeChecker.GetFootPos();
+        _playerAnimatorController.SetBool("Hanging", _isHanging);            
+        _cc.enabled = true;       
+        _isJumping = false;
     }
 }
 

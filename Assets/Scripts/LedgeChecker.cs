@@ -5,8 +5,8 @@ using UnityEngine;
 public class LedgeChecker : MonoBehaviour
 {
     private Player _player;
-    [SerializeField] private Vector3 _handPos;
-
+    [SerializeField] private Vector3 _handPos, _footPos;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +21,12 @@ public class LedgeChecker : MonoBehaviour
     {
         if (other.CompareTag("Ledge_Grab_Checker"))
         {
-            _player.UpdateLedgeStatus(_handPos);
+            _player.UpdateLedgeStatus(_handPos, this);
         }
+    }
+
+    public Vector3 GetFootPos()
+    {
+        return _footPos;
     }
 }
